@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(7);
         hasPowerup = false;
         powerupIndicator.gameObject.SetActive(false);
+        
     }
     private void OnTriggerEnter(Collider other)
     {
