@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     private float spawnRange = 9;
     public int enemyCount;
     private int waveNumber = 1;
-    public GameObject powerupPrefab;
+    public GameObject[] powerupPrefabList;
     private Vector3 GenerateSpawnPosition()
     {
         float spawnX = Random.Range(-spawnRange,
@@ -20,7 +20,8 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         SpawnEnemyWave(waveNumber);
-        Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
+        int aleatorio = Random.Range(0, powerupPrefabList.Length);
+        Instantiate(powerupPrefabList[aleatorio], GenerateSpawnPosition(), powerupPrefabList[aleatorio].transform.rotation);
     }
 
     void SpawnEnemyWave(int enemiesToSpawn)
@@ -42,7 +43,8 @@ public class Spawner : MonoBehaviour
         {
             waveNumber++;
             SpawnEnemyWave(waveNumber);
-            Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
+            int aleatorio = Random.Range(0, enemyPrefabList.Length);
+            Instantiate(powerupPrefabList[aleatorio], GenerateSpawnPosition(), powerupPrefabList[aleatorio].transform.rotation);
         }
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float speed;
     private int multiplier = 200;
     public bool hasPowerup;
+    public int activePowerup = 1;
+    public GameObject projectilePrefab;
     private float powerupStrength = 15.0f;
     public GameObject powerupIndicator;
     void Start()
@@ -29,23 +30,39 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(7);
         hasPowerup = false;
         powerupIndicator.gameObject.SetActive(false);
-        
+
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("powerup"))
+        string[] sub = other.gameObject.tag.ToString().Split('_');
+        Debug.Log(sub[0]);
+        if (sub[0] == "powerup")
         {
-            hasPowerup = true;
             Destroy(other.gameObject);
-            StartCoroutine(PowerupCountdownRoutine());
-            powerupIndicator.gameObject.SetActive(true);
+            activePowerup = int.Parse(sub[1]);
 
+            if (activePowerup == 1)
+            {
+                hasPowerup = true;
+                StartCoroutine(PowerupCountdownRoutine());
+                powerupIndicator.gameObject.SetActive(true);
+
+            }
+            if (activePowerup == 2)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    Instantiate(projectilePrefab, transform.position,
+                       Quaternion.Euler(new Vector3(0, 45f * i, 0)));
+                }
+            }
         }
+
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy") &&
-       hasPowerup)
+       hasPowerup && activePowerup == 1)
         {
             Rigidbody enemyRb =
            collision.gameObject.GetComponent<Rigidbody>();
