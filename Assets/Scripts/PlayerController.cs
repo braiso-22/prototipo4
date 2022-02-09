@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public GameObject projectilePrefab;
     private float powerupStrength = 15.0f;
     public GameObject powerupIndicator;
+    public AudioClip choque;
     public AudioClip golpe;
     private AudioSource playerSound;
     void Start()
@@ -65,19 +66,26 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") &&
-       hasPowerup && activePowerup == 1)
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            Rigidbody enemyRb =
-           collision.gameObject.GetComponent<Rigidbody>();
-            Vector3 awayFromPlayer =
-           (collision.gameObject.transform.position - transform.position);
-            playerSound.PlayOneShot(golpe, 1);
-            Debug.Log("Player collided with " +
-           collision.gameObject + " with powerup set to " +
-           hasPowerup);
-            enemyRb.AddForce(awayFromPlayer *
-           powerupStrength, ForceMode.Impulse);
+            if (hasPowerup && activePowerup == 1)
+            {
+                playerSound.PlayOneShot(golpe, 1);
+                Rigidbody enemyRb =
+               collision.gameObject.GetComponent<Rigidbody>();
+                Vector3 awayFromPlayer =
+               (collision.gameObject.transform.position - transform.position);
+
+                Debug.Log("Player collided with " +
+               collision.gameObject + " with powerup set to " +
+               hasPowerup);
+                enemyRb.AddForce(awayFromPlayer *
+               powerupStrength, ForceMode.Impulse);
+            }
+            else
+            {
+                playerSound.PlayOneShot(choque, 1);
+            }
         }
     }
 }

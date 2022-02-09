@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     public AudioClip muerte1;
     public AudioClip muerte2;
     private AudioSource enemyAudio;
-    private float speed = 3.0f;
+    private float speed = 10f;
     Rigidbody enemyRb;
     GameObject player;
     private bool alife = true;
@@ -22,8 +22,8 @@ public class Enemy : MonoBehaviour
     {
         Vector3 moveDirection = (player.transform.position
         - transform.position).normalized;
-        enemyRb.AddForce(moveDirection * speed);
-        if (transform.position.y < -3)
+        enemyRb.AddForce(moveDirection * speed * 100 * Time.deltaTime);
+        if (transform.position.y < -1.5f)
         {
             if (alife)
             {

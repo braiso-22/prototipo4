@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1057,7 +1057,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967012356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.39, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1080,6 +1080,7 @@ MonoBehaviour:
   activePowerup: 0
   projectilePrefab: {fileID: 2076427648582427018, guid: f8818572187b3784f9b19f9c5dda34f6, type: 3}
   powerupIndicator: {fileID: 1216187568}
+  choque: {fileID: 8300000, guid: 38e53eb079daced4b8ffe2e875639e0c, type: 3}
   golpe: {fileID: 8300000, guid: 7a55251866752ac4ca12a93d13f522bd, type: 3}
 --- !u!82 &1967012363
 AudioSource:
