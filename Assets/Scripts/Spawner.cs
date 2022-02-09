@@ -41,10 +41,12 @@ public class Spawner : MonoBehaviour
         enemyCount = FindObjectsOfType<Enemy>().Length;
         if (enemyCount <= 0)
         {
-            waveNumber++;
+            ScoreManager.instance.setRound(waveNumber++);
+
             SpawnEnemyWave(waveNumber);
             int aleatorio = Random.Range(0, enemyPrefabList.Length);
             Instantiate(powerupPrefabList[aleatorio], GenerateSpawnPosition(), powerupPrefabList[aleatorio].transform.rotation);
+
         }
     }
 }

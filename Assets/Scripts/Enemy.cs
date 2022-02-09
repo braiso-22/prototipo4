@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public AudioClip muerte;
+    private AudioSource enemyAudio;
     private float speed = 3.0f;
     Rigidbody enemyRb;
     GameObject player;
     void Start()
     {
         enemyRb = GetComponent<Rigidbody>();
+        enemyAudio = GetComponent<AudioSource>();
         player = GameObject.Find("Player");
     }
 
@@ -25,12 +28,12 @@ public class Enemy : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-
         if (collision.gameObject.CompareTag("projectile"))
         {
-            Debug.Log(collision.gameObject.tag);
+            Destroy(gameObject);
+            //Debug.Log(collision.gameObject.tag);
             Destroy(collision.gameObject);
-            Debug.Log("proyectil muerto");
+            //Debug.Log("proyectil muerto");
             Destroy(gameObject);
         }
     }
