@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     private float speed = 3.0f;
     Rigidbody enemyRb;
     GameObject player;
+    private bool alife = true;
     void Start()
     {
         enemyRb = GetComponent<Rigidbody>();
@@ -23,15 +24,18 @@ public class Enemy : MonoBehaviour
         enemyRb.AddForce(moveDirection * speed);
         if (transform.position.y < -3)
         {
-            StartCoroutine(SetDead());
+            if (alife) StartCoroutine(SetDead());
         }
     }
     IEnumerator SetDead()
     {
+        alife = false;
         enemyAudio.PlayOneShot(muerte, 1.0f);
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<Collider>().enabled = false;
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
-        
+
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -40,7 +44,7 @@ public class Enemy : MonoBehaviour
             //Debug.Log(collision.gameObject.tag);
             Destroy(collision.gameObject);
             //Debug.Log("proyectil muerto");
-            StartCoroutine(SetDead());
+            if (alife) StartCoroutine(SetDead());
         }
     }
 }

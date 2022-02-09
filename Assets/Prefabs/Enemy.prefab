@@ -127,7 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muerte: {fileID: 8300000, guid: 4bcde6de2166e41e284ec46d8a01fb90, type: 3}
-  alife: 1
 --- !u!82 &-5643823717022814599
 AudioSource:
   m_ObjectHideFlags: 0
