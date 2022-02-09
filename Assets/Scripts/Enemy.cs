@@ -23,18 +23,24 @@ public class Enemy : MonoBehaviour
         enemyRb.AddForce(moveDirection * speed);
         if (transform.position.y < -3)
         {
-            Destroy(gameObject);
+            StartCoroutine(SetDead());
         }
+    }
+    IEnumerator SetDead()
+    {
+        enemyAudio.PlayOneShot(muerte, 1.0f);
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
+        
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("projectile"))
         {
-            Destroy(gameObject);
             //Debug.Log(collision.gameObject.tag);
             Destroy(collision.gameObject);
             //Debug.Log("proyectil muerto");
-            Destroy(gameObject);
+            StartCoroutine(SetDead());
         }
     }
 }
