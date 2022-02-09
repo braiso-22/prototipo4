@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public AudioClip muerte;
+    public AudioClip muerte1;
+    public AudioClip muerte2;
     private AudioSource enemyAudio;
     private float speed = 3.0f;
     Rigidbody enemyRb;
@@ -24,13 +25,17 @@ public class Enemy : MonoBehaviour
         enemyRb.AddForce(moveDirection * speed);
         if (transform.position.y < -3)
         {
-            if (alife) StartCoroutine(SetDead());
+            if (alife)
+            {
+                enemyAudio.PlayOneShot(muerte2, 1.0f);
+                StartCoroutine(SetDead());
+            }
         }
     }
     IEnumerator SetDead()
     {
         alife = false;
-        enemyAudio.PlayOneShot(muerte, 1.0f);
+
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<Collider>().enabled = false;
         yield return new WaitForSeconds(1);
@@ -44,7 +49,12 @@ public class Enemy : MonoBehaviour
             //Debug.Log(collision.gameObject.tag);
             Destroy(collision.gameObject);
             //Debug.Log("proyectil muerto");
-            if (alife) StartCoroutine(SetDead());
+
+            if (alife)
+            {
+                enemyAudio.PlayOneShot(muerte1, 1.0f);
+                StartCoroutine(SetDead());
+            }
         }
     }
 }

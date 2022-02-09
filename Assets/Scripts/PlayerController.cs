@@ -13,10 +13,13 @@ public class PlayerController : MonoBehaviour
     public GameObject projectilePrefab;
     private float powerupStrength = 15.0f;
     public GameObject powerupIndicator;
+    public AudioClip golpe;
+    private AudioSource playerSound;
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("Focal point");
+        playerSound = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -69,6 +72,7 @@ public class PlayerController : MonoBehaviour
            collision.gameObject.GetComponent<Rigidbody>();
             Vector3 awayFromPlayer =
            (collision.gameObject.transform.position - transform.position);
+            playerSound.PlayOneShot(golpe, 1);
             Debug.Log("Player collided with " +
            collision.gameObject + " with powerup set to " +
            hasPowerup);
