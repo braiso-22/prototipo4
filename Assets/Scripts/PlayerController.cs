@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         string[] sub = other.gameObject.tag.ToString().Split('_');
-        Debug.Log(sub[0]);
+        //Debug.Log(sub[0]);
         if (sub[0] == "powerup")
         {
             Destroy(other.gameObject);
@@ -53,8 +53,9 @@ public class PlayerController : MonoBehaviour
                 for (int i = 0; i < 8; i++)
                 {
                     Instantiate(projectilePrefab, transform.position,
-                       Quaternion.Euler(new Vector3(0, 45f * i, 0)));
+                       Quaternion.Euler(new Vector3(0, 45f * i, 0))).transform.Translate(Vector3.forward * 2);
                 }
+
             }
         }
 

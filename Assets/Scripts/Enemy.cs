@@ -13,8 +13,6 @@ public class Enemy : MonoBehaviour
         player = GameObject.Find("Player");
     }
 
-
-
     void Update()
     {
         Vector3 moveDirection = (player.transform.position
@@ -22,6 +20,17 @@ public class Enemy : MonoBehaviour
         enemyRb.AddForce(moveDirection * speed);
         if (transform.position.y < -3)
         {
+            Destroy(gameObject);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.CompareTag("projectile"))
+        {
+            Debug.Log(collision.gameObject.tag);
+            Destroy(collision.gameObject);
+            Debug.Log("proyectil muerto");
             Destroy(gameObject);
         }
     }
